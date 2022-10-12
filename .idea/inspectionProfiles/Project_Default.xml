@@ -1,0 +1,18 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="MavenPackageUpdate" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="excludeList">
+        <list>
+          <option value="javax.xml.bind:jaxb-api" />
+          <option value="jakarta.xml.bind:jakarta.xml.bind-api" />
+          <option value="com.sun.xml.bind:jaxb-impl" />
+          <option value="org.eclipse.persistence:org.eclipse.persistence.moxy" />
+          <option value="javax.activation:activation" />
+          <option value="com.sun.xml.bind:jaxb-core" />
+          <option value="org.javassist:javassist" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
