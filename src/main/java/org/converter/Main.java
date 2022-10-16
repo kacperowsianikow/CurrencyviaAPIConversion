@@ -5,7 +5,6 @@ import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
 
-import java.awt.event.KeyAdapter;
 import java.io.File;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -18,7 +17,6 @@ import java.util.Scanner;
 
 import static org.converter.DBClearTable.DBClearData;
 import static org.converter.DBCreate.createDB;
-import static org.converter.DBCreateTable.createTableIfNotExists;
 
 public class Main {
     private static String column = "";
@@ -29,6 +27,7 @@ public class Main {
     private static String orderChoiceTwo = "";
     private static String searchChoice = "";
     private static String saveName = "";
+    private static String fileName = "";
     private static String name = "";
     private static String date = "";
     private static String exchangeDate = "";
@@ -109,13 +108,14 @@ public class Main {
             System.out.println("Wyszukanie rekordu w bazie danych - 3");
             System.out.println("Sortowanie oraz wyswietlenie rekordow znajdujacych sie w bazie danych - 4");
             System.out.println("Usuniecie wszystkich danych - 5");
+            System.out.println("Zapisanie danych z bazy danych do pliku xml - 6");
             System.out.println("Opuszczenie programu - 0");
 
             String position = "";
-            while (!position.matches("[0-5]")) {
+            while (!position.matches("[0-6]")) {
                 position = scanner.nextLine();
-                if (!position.matches("[0-5]")) {
-                    System.out.println("Wprowadz wartosc 0 - 5!");
+                if (!position.matches("[0-6]")) {
+                    System.out.println("Wprowadz wartosc 0 - 6!");
                 }
             }
 
@@ -125,11 +125,29 @@ public class Main {
                 case "3" -> searchDataInDB();
                 case "4" -> sortAndViewDataInDB();
                 case "5" -> DBClearData();
+                case "6" -> saveAllDBtoXml();
                 case "0" -> System.exit(0);
                 default -> {
                 }
             }
         }
+    }
+
+    private static void saveAllDBtoXml() {
+        while (!fileName.matches("[a-zA-Z0-9 ]+")) {
+            System.out.println("Wprowadz nazwe pliku XML (bez znakow specjalnych)");
+            System.out.println("Przykladowo: ");
+            System.out.println("faktura");
+            fileName = scanner.nextLine();
+
+            if (!fileName.matches("[a-zA-Z0-9 ]+")) {
+                System.out.println("Wprowadzono niepoprawna nazwe!");
+            }
+        }
+        fileName += ".xml";
+
+        XmlFromDB xml = new XmlFromDB();
+        xml.xmlFromDB(fileName);
     }
 
     private static void saveToXmlAndDB(Scanner scanner) {
