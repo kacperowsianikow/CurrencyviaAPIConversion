@@ -13,7 +13,6 @@ public class DBSelectData {
         String sqlAll = "SELECT * FROM computers";
 
         try {
-
             prepStmt = conn.prepareStatement(sqlAll);
             resSet = prepStmt.executeQuery();
 
@@ -23,14 +22,17 @@ public class DBSelectData {
                         resSet.getDouble("koszt_USD") + "\t" +
                         resSet.getDouble("koszt_PLN"));
             }
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             System.out.println(e.getMessage());
-        } finally {
+        }
+        finally {
             try {
                 prepStmt.close();
                 resSet.close();
                 conn.close();
-            } catch (SQLException e) {
+            }
+            catch (SQLException e) {
                 System.out.println(e.getMessage());
             }
         }
